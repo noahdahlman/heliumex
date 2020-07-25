@@ -18,6 +18,8 @@ fee_overrides_config_map = {
     "binance_taker_fee": new_fee_config_var("binance_taker_fee"),
     "coinbase_pro_maker_fee": new_fee_config_var("coinbase_pro_maker_fee"),
     "coinbase_pro_taker_fee": new_fee_config_var("coinbase_pro_taker_fee"),
+    "heliumex_maker_fee": new_fee_config_var("heliumex_maker_fee"),
+    "heliumex_taker_fee": new_fee_config_var("heliumex_taker_fee"),
     "huobi_maker_fee": new_fee_config_var("huobi_maker_fee"),
     "huobi_taker_fee": new_fee_config_var("huobi_taker_fee"),
     "liquid_maker_fee": new_fee_config_var("liquid_maker_fee"),

@@ -14,6 +14,7 @@ from hummingbot.logger import HummingbotLogger
 from hummingbot.logger.application_warning import ApplicationWarning
 from hummingbot.market.binance.binance_market import BinanceMarket
 from hummingbot.market.bittrex.bittrex_market import BittrexMarket
+from hummingbot.market.heliumex.heliumex_market import HeliumExMarket
 from hummingbot.market.kucoin.kucoin_market import KucoinMarket
 from hummingbot.market.coinbase_pro.coinbase_pro_market import CoinbaseProMarket
 from hummingbot.market.huobi.huobi_market import HuobiMarket
@@ -54,6 +55,7 @@ MARKET_CLASSES = {
     "bamboo_relay": BambooRelayMarket,
     "binance": BinanceMarket,
     "coinbase_pro": CoinbaseProMarket,
+    "heliumex": HeliumExMarket,
     "huobi": HuobiMarket,
     "liquid": LiquidMarket,
     "radar_relay": RadarRelayMarket,
@@ -174,7 +176,7 @@ class HummingbotApplication(*commands):
                         '\n'.join(uncancelled_order_ids)
                     ))
         except Exception:
-            self.logger().error(f"Error canceling outstanding orders.", exc_info=True)
+            self.logger().error("Error canceling outstanding orders.", exc_info=True)
             success = False
 
         if success:
@@ -285,6 +287,16 @@ class HummingbotApplication(*commands):
                                            coinbase_pro_passphrase,
                                            trading_pairs=trading_pairs,
                                            trading_required=self._trading_required)
+            elif market_name == "heliumex":
+                heliumex_api_key = global_config_map.get("heliumex_api_key").value
+                heliumex_secret_key = global_config_map.get("heliumex_secret_key").value
+                heliumex_one_time_password = global_config_map.get("heliumex_one_time_password").value
+
+                market = HeliumExMarket(heliumex_api_key,
+                                        heliumex_secret_key,
+                                        heliumex_one_time_password,
+                                        trading_pairs=trading_pairs,
+                                        trading_required=self._trading_required)
             elif market_name == "huobi":
                 huobi_api_key = global_config_map.get("huobi_api_key").value
                 huobi_secret_key = global_config_map.get("huobi_secret_key").value

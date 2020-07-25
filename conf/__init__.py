@@ -74,6 +74,11 @@ bitcoin_com_secret_key = os.getenv("BITCOIN_COM_SECRET_KEY")
 
 test_web3_provider_list = [os.getenv("WEB3_PROVIDER")]
 
+# HeliumEx Tests
+heliumex_api_key = os.getenv("HELIUMEX_API_KEY")
+heliumex_secret_key = os.getenv("HELIUMEX_API_SECRET")
+heliumex_one_time_password = os.getenv("HELIUMEX_ONE_TIME_PASSWORD")
+
 # Liquid Tests
 liquid_api_key = os.getenv("LIQUID_API_KEY")
 liquid_secret_key = os.getenv("LIQUID_SECRET_KEY")

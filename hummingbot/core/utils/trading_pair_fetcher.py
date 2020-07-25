@@ -178,6 +178,10 @@ class TradingPairFetcher:
 
         return []
 
+    async def fetch_heliumex_trading_pair(self) -> List[str]:
+        await asyncio.sleep(0.5)
+        return ["HNT-USDC"]
+
     async def fetch_huobi_trading_pairs(self) -> List[str]:
         try:
             from hummingbot.market.huobi.huobi_market import HuobiMarket
@@ -333,6 +337,7 @@ class TradingPairFetcher:
                  self.fetch_bamboo_relay_trading_pairs(),
                  self.fetch_coinbase_pro_trading_pairs(),
                  self.fetch_dolomite_trading_pairs(),
+                 self.fetch_heliumex_trading_pair(),
                  self.fetch_huobi_trading_pairs(),
                  self.fetch_liquid_trading_pairs(),
                  self.fetch_bittrex_trading_pairs(),
@@ -351,12 +356,13 @@ class TradingPairFetcher:
             "bamboo_relay": results[1],
             "coinbase_pro": results[2],
             "dolomite": results[3],
-            "huobi": results[4],
-            "liquid": results[5],
-            "bittrex": results[6],
-            "kucoin": results[7],
-            "bitcoin_com": results[8],
-            "kraken": results[9],
-            "radar_relay": results[10]
+            "heliumex": results[4],
+            "huobi": results[5],
+            "liquid": results[6],
+            "bittrex": results[7],
+            "kucoin": results[8],
+            "bitcoin_com": results[9],
+            "kraken": results[10],
+            "radar_relay": results[11]
         }
         self.ready = True

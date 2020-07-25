@@ -109,7 +109,8 @@ global_config_map = {
                            ["WETH", 10],
                            ["USDC", 3000],
                            ["TUSD", 3000],
-                           ["PAX", 3000]]),
+                           ["PAX", 3000],
+                           ["HNT", 6000]]),
     "binance_api_key":
         ConfigVar(key="binance_api_key",
                   prompt="Enter your Binance API key >>> ",
@@ -138,6 +139,24 @@ global_config_map = {
         ConfigVar(key="coinbase_pro_passphrase",
                   prompt="Enter your Coinbase passphrase >>> ",
                   required_if=using_exchange("coinbase_pro"),
+                  is_secure=True,
+                  is_connect_key=True),
+    "heliumex_api_key":
+        ConfigVar(key="heliumex_api_key",
+                  prompt="Enter your HeliumEx User Name >>> ",
+                  required_if=using_exchange("heliumex"),
+                  is_secure=True,
+                  is_connect_key=True),
+    "heliumex_secret_key":
+        ConfigVar(key="heliumex_secret_key",
+                  prompt="Enter your HeliumEx Password >>> ",
+                  required_if=using_exchange("heliumex"),
+                  is_secure=True,
+                  is_connect_key=True),
+    "heliumex_one_time_password":
+        ConfigVar(key="heliumex_one_time_password",
+                  prompt="Enter your HeliumEx 2FA Code >>> ",
+                  required_if=using_exchange("heliumex"),
                   is_secure=True,
                   is_connect_key=True),
     "huobi_api_key":

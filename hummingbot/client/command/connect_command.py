@@ -17,6 +17,7 @@ OPTIONS = {
     "bittrex",
     "kucoin",
     "kraken",
+    "heliumex",
     "ethereum"
 }
 
@@ -65,10 +66,10 @@ class ConnectCommand:
         self._notify("\nTesting connections, please wait...")
         await Security.wait_til_decryption_done()
         df, failed_msgs = await self.connection_df()
-        lines = ["    " + l for l in df.to_string(index=False).split("\n")]
+        lines = ["    " + line for line in df.to_string(index=False).split("\n")]
         if failed_msgs:
             lines.append("\nFailed connections:")
-            lines.extend([f"    " + k + ": " + v for k, v in failed_msgs.items()])
+            lines.extend(["    " + k + ": " + v for k, v in failed_msgs.items()])
         self._notify("\n".join(lines))
 
     async def connection_df(self  # type: HummingbotApplication
