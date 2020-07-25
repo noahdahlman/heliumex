@@ -29,6 +29,7 @@ from hummingbot.core.data_type.order_book cimport OrderBook
 from hummingbot.core.data_type.transaction_tracker import TransactionTracker
 from hummingbot.core.data_type.user_stream_tracker import UserStreamTrackerDataSourceType
 from hummingbot.client.config.fee_overrides_config_map import fee_overrides_config_map
+from hummingbot.core.utils.estimate_fee import estimate_fee
 
 from hummingbot.core.event.events import (
     TradeType,
@@ -428,7 +429,13 @@ cdef class HeliumExMarket(MarketBase):
             return TradeFee(percent=fee_overrides_config_map["heliumex_taker_fee"].value / Decimal("100"))
 
         if trading_pair not in self._trade_fees:
-            self.logger().warning(f"Unable to find trade fee for {trading_pair}. Using default 0.35% maker/taker fee.")
+            is_maker = order_type is OrderType.LIMIT
+            estimate = estimate_fee("heliumex", is_maker)
+            if estimate is not None:
+                self.logger().info("found a fee estimate")
+                return estimate
+            else:
+                self.logger().info("could not find a fee estimate, using hardcoded default")
         else:
             maker_fee, taker_fee = self._trade_fees.get(trading_pair)
 

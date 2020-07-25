@@ -21,7 +21,7 @@ An opportunity arises when Hummingbot can buy on one exchange at a lower price a
 
 ## Configuration Parameters and Walkthrough
 
-The following walks through all the steps when running `create` command. These parameters are fields in Hummingbot configuration files (located in the `/conf` folder, e.g. `conf/arb_[#].yml`).
+The following walks through all the steps when running `create` command. These parameters are fields in Hummingbot configuration files (located in the `/conf` folder, e.g. `conf/conf_arb_[#].yml`).
 
 | Parameter | Prompt | Definition |
 |-----------|--------|------------|
