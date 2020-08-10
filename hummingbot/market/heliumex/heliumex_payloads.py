@@ -10,7 +10,7 @@ from decimal import Decimal
 def order_create(security_id: str, type: str, side: str, quantity: Decimal, price: Decimal, client_order_id: str = None) -> Dict[str, str]:
 
     order = {
-        "client_order_id": client_order_id if client_order_id is not None else str(uuid.uuid1()),
+        "client_order_id": client_order_id if client_order_id is not None else str(uuid.uuid4()).upper(),
         "security_id": security_id,
         "type": type,
         "side": side,

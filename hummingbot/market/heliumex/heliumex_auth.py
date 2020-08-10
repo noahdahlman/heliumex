@@ -15,9 +15,9 @@ class HeliumExAuth:
 
     @classmethod
     def logger(cls) -> HummingbotLogger:
-        if cls._heliumex_usds_logger is None:
-            cls._heliumex_usds_logger = logging.getLogger(__name__)
-        return cls._heliumex_usds_logger
+        if cls._heliumex_auth_logger is None:
+            cls._heliumex_auth_logger = logging.getLogger(__name__)
+        return cls._heliumex_auth_logger
 
     def __init__(self, api_key: str, secret_key: str, one_time_password: Optional[str] = None):
         self._api_key: Optional[str] = api_key

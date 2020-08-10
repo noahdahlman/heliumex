@@ -883,7 +883,7 @@ cdef class HeliumExMarket(MarketBase):
         Synchronous wrapper that generates a client-side order ID and schedules the buy order.
         """
         cdef:
-            str client_order_id = str(uuid.uuid1()).upper()
+            str client_order_id = str(uuid.uuid4()).upper()
 
         safe_ensure_future(self.execute_buy(client_order_id, trading_pair, amount, order_type, price))
         return client_order_id
@@ -947,7 +947,7 @@ cdef class HeliumExMarket(MarketBase):
         Synchronous wrapper that generates a client-side order ID and schedules the sell order.
         """
         cdef:
-            str client_order_id = str(uuid.uuid1()).upper()
+            str client_order_id = str(uuid.uuid4()).upper()
         safe_ensure_future(self.execute_sell(client_order_id, trading_pair, amount, order_type, price))
         return client_order_id
 
@@ -991,7 +991,7 @@ cdef class HeliumExMarket(MarketBase):
     async def cancel_all(self, timeout_seconds: float) -> List[CancellationResult]:
         """
         *required
-        Async function that cancels all active orders.
+        Async function that cancels all known active orders.
         Used by bot's top level stop and exit commands (cancelling outstanding orders on exit)
         :returns: List of CancellationResult which indicates whether each order is successfully cancelled.
         """

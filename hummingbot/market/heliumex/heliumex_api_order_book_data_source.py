@@ -233,7 +233,7 @@ class HeliumExAPIOrderBookDataSource(OrderBookTrackerDataSource):
                     topic = CONSTANTS.order_book_WS(trading_pair)
                     subscription_id = await self._websocket.subscribe(
                         topic,
-                        f"orderbook-{trading_pair}-{str(uuid.uuid1())[:8]}"
+                        f"orderbook-{trading_pair}-{str(uuid.uuid4())[:8]}"
                     )
 
                     async for message in self._websocket.on([topic], [subscription_id]):

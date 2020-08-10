@@ -104,7 +104,7 @@ class HeliumExWebsocket:
 
     async def subscribe(self, destination: str, subscription_id: Optional[str] = None) -> Optional[str]:
         if subscription_id is None:
-            subscription_id = f"{destination}-{str(uuid.uuid1())[:8]}"
+            subscription_id = f"{destination}-{str(uuid.uuid4())[:8]}"
 
         try:
             if self._use_stomp:
@@ -138,7 +138,7 @@ class HeliumExWebsocket:
             return
 
         if correlation_id is None:
-            correlation_id = uuid.uuid4()
+            correlation_id = str(uuid.uuid4())
 
         try:
             message = STOMP.send(
