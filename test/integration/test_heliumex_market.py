@@ -248,3 +248,9 @@ class TestHeliumExMarket(unittest.TestCase):
 
         # Reset the logs
         self.market_logger.clear()
+
+    def test_cancel_all(self):
+
+        self.market.cancel_all(30)
+
+        self.assertTrue(True)
