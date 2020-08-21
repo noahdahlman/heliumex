@@ -23,8 +23,16 @@ class TestHeliumExAuth(unittest.TestCase):
         cls.auth: HeliumExAuth = HeliumExAuth(api_key, secret_key)
 
     def test_auth_succeeds(self):
-        result = self.ev_loop.run_until_complete(self.auth.get_auth_token())
-        assert result is not None and len(result) > 0
+        auth_token_1 = self.ev_loop.run_until_complete(self.auth.get_auth_token(force_refresh = False))
+        assert auth_token_1 is not None and len(auth_token_1) > 0
+
+        refresh_result = self.ev_loop.run_until_complete(self.auth.refresh())
+        assert refresh_result
+
+        auth_token_2 = self.ev_loop.run_until_complete(self.auth.get_auth_token(force_refresh = False))
+        assert auth_token_2 is not None and len(auth_token_2) > 0
+
+        assert auth_token_1 != auth_token_2
 
 
 def main():

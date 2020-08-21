@@ -384,10 +384,15 @@ cdef class HeliumExMarket(MarketBase):
         client = await self._http_client()
         async with client.request(http_method,
                                   url=url, timeout=self.API_CALL_TIMEOUT, data=data_str, headers=headers) as response:
+
+            # try a refresh
+            if response.status == 401:
+                await self._heliumex_auth.refresh()
+
             try:
-                data = await response.json()
+                response_data = await response.json()
             except aiohttp.ContentTypeError as e:
-                data = await response.text()
+                response_data = await response.text()
 
             if response.status != 200:
                 # map some common sys errors to response errors
@@ -401,8 +406,8 @@ cdef class HeliumExMarket(MarketBase):
                     502: errno.ENOTCONN
 
                 }
-                raise OSError(error_code.get(response.status, errno.ENOENT), f"Error fetching data from {url}. HTTP status is {response.status}. {data}")
-            return data
+                raise OSError(error_code.get(response.status, errno.ENOENT), f"Error fetching data from {url}. HTTP status is {response.status}. {response_data}")
+            return response_data
 
     cdef object c_get_fee(self,
                           str base_currency,
