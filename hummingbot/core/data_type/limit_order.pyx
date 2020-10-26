@@ -48,6 +48,7 @@ cdef class LimitOrder:
             string cpp_trading_pair = trading_pair.encode("utf8")
             string cpp_base_currency = base_currency.encode("utf8")
             string cpp_quote_currency = quote_currency.encode("utf8")
+        self._timestamp: int = int(time.time())
         self._cpp_limit_order = CPPLimitOrder(cpp_client_order_id,
                                               cpp_trading_pair,
                                               is_buy,
